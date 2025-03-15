@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey">#99999999</color>
+    <color name="dialog_front">#FF333333</color>
+    <color name="dialog_back">#FFFFFFFF</color>
+    <color name="editor_icon">#FF000000</color>
+    <color name="editor_foreground">#FF000000</color>
+    <color name="editor_background">#FFFFFFFF</color>
+    <color name="clicked">#FF773399</color>
+    <color name="highlight">#77773399</color>
+    <color name="button_list">@android:color/holo_purple</color>
+    <color name="appBarForeground">#FF551177</color>
+    <color name="floatingButtonForeground">#FF000000</color>
+    <color name="floatingButtonRipple">#77000000</color>
+</resources>

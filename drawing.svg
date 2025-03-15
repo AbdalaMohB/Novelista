@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="drawing.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.67793911"
+     inkscape:cx="-1.4750587"
+     inkscape:cy="561.25984"
+     inkscape:window-width="1920"
+     inkscape:window-height="1008"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#0000ff;stroke:#000000;stroke-width:0.0649999;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="rect846"
+       width="68.594589"
+       height="59.841782"
+       x="26.637001"
+       y="59.021641"
+       ry="6.4423642" />
+    <path
+       style="fill:#ff0000;stroke:#000000;stroke-width:0.245669;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path870"
+       sodipodi:type="arc"
+       sodipodi:cx="60.326286"
+       sodipodi:cy="89.129166"
+       sodipodi:rx="32.530418"
+       sodipodi:ry="29.657448"
+       sodipodi:start="0"
+       sodipodi:end="6.2772337"
+       sodipodi:arc-type="slice"
+       d="M 92.856705,89.129166 A 32.530418,29.657448 0 0 1 60.374688,118.78658 32.530418,29.657448 0 0 1 27.796012,89.21742 32.530418,29.657448 0 0 1 60.181081,59.472013 32.530418,29.657448 0 0 1 92.856129,88.952658 l -32.529843,0.176508 z" />
+  </g>
+</svg>

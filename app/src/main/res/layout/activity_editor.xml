@@ -1,0 +1,307 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/edlay">
+    <com.hatman.novelista.EditorUtils.CallbackRichEditor
+        android:id="@+id/editor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        />
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_list"
+        android:padding="2dp"
+
+        >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:divider="@drawable/divider1"
+          android:showDividers="middle">
+
+             <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_undo"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:backgroundTint="@drawable/buttonstate"
+                android:contentDescription="@null"
+                android:src="@drawable/undo"
+                android:scaleType="centerInside"/>
+
+             <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_redo"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/redo"
+                android:scaleType="centerInside"
+                />
+
+             <com.hatman.novelista.EditorUtils.ImageSwitch
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_bold"
+                android:layout_width="@dimen/button"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:src="@drawable/bold"
+                 android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+
+                 app:onSwitchColor="@color/clicked"/>
+
+             <com.hatman.novelista.EditorUtils.ImageSwitch
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_italic"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/italic"
+                android:scaleType="centerInside"
+                 app:onSwitchColor="@color/clicked"/>
+
+<!--              <com.hatman.novelista.EditorUtils.ImageSwitch-->
+<!--                 android:padding="@dimen/image_size_inverse"-->
+<!--                 android:adjustViewBounds="true"-->
+
+<!--                app:tint="@color/editor_icon"-->
+<!--                android:id="@+id/action_subscript"-->
+<!--                android:layout_width="@dimen/button"-->
+<!--                android:layout_height="@dimen/button"-->
+<!--                android:background="?attr/selectableItemBackground"-->
+<!--                android:contentDescription="@null"-->
+<!--                android:src="@drawable/subscript"-->
+<!--                android:scaleType="centerInside"-->
+<!--                  app:onSwitchColor="@color/clicked"/>-->
+
+<!--             <com.hatman.novelista.EditorUtils.ImageSwitch-->
+<!--                 android:padding="@dimen/image_size_inverse"-->
+<!--                 android:adjustViewBounds="true"-->
+<!--                app:tint="@color/editor_icon"-->
+<!--                android:id="@+id/action_superscript"-->
+<!--                android:layout_width="@dimen/button"-->
+<!--                android:layout_height="@dimen/button"-->
+<!--                android:background="?attr/selectableItemBackground"-->
+<!--                android:contentDescription="@null"-->
+<!--                android:src="@drawable/superscript"-->
+<!--                android:scaleType="centerInside"-->
+<!--                 app:onSwitchColor="@color/clicked"/>-->
+
+             <com.hatman.novelista.EditorUtils.ImageSwitch
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_strikethrough"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/strikethrough"
+                android:scaleType="centerInside"
+                 app:onSwitchColor="@color/clicked"/>
+
+             <com.hatman.novelista.EditorUtils.ImageSwitch
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_underline"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/underline"
+                android:scaleType="centerInside"
+                 app:onSwitchColor="@color/clicked"/>
+
+             <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_heading1"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/h1"
+                android:scaleType="centerInside" />
+
+             <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_heading2"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/h2"
+                android:scaleType="centerInside"
+                 />
+
+            <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_heading3"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/h3"
+                android:scaleType="centerInside"/>
+
+            <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_heading4"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/h4"
+                android:scaleType="centerInside"/>
+
+            <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_heading5"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/h5"
+                android:scaleType="centerInside"/>
+
+            <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_heading6"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/h6"
+                android:scaleType="centerInside"/>
+
+
+             <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_indent"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/indent"
+                android:scaleType="centerInside"/>
+
+             <ImageButton
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_outdent"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/outdent"
+                android:scaleType="centerInside"/>
+
+            <com.hatman.novelista.EditorUtils.ImageSwitch
+                app:onSwitchColor="@color/clicked"
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_align_left"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/justify_left"
+                android:scaleType="centerInside"/>
+
+            <com.hatman.novelista.EditorUtils.ImageSwitch
+                app:onSwitchColor="@color/clicked"
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_align_center"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/justify_center"
+                android:scaleType="centerInside"/>
+
+            <com.hatman.novelista.EditorUtils.ImageSwitch
+                app:onSwitchColor="@color/clicked"
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_align_right"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/justify_right"
+                android:scaleType="centerInside"/>
+
+            <com.hatman.novelista.EditorUtils.ImageSwitch
+                app:onSwitchColor="@color/clicked"
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_insert_bullets"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/bullets"
+                android:scaleType="centerInside"/>
+
+            <com.hatman.novelista.EditorUtils.ImageSwitch
+                app:onSwitchColor="@color/clicked"
+                 android:padding="@dimen/image_size_inverse"
+                 android:adjustViewBounds="true"
+                app:tint="@color/editor_icon"
+                android:id="@+id/action_insert_numbers"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@null"
+                android:src="@drawable/numbers"
+                android:scaleType="centerInside"/>
+
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+
+
+</LinearLayout>
