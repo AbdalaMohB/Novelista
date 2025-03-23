@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hatman.novelista.Rvtools.RvAdapter
+import com.hatman.novelista.database.DBHandler
 import com.hatman.novelista.fileUtils.FileManager
 import com.hatman.novelista.popups.StoryDialog
 import java.io.File
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dialog: StoryDialog
     private lateinit var stories: File
     lateinit var customAdapter: RvAdapter
+    lateinit var db: DBHandler
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,8 +47,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener{
             addStory()
         }
+        db=DBHandler(this)
         dialog= StoryDialog{ it ->
-           FileManager.mkdir(stories, it)
+           FileManager.mkdir(stories, it, this)
             val story= FileManager.getFile(stories, it)
             FileManager.mkdir(story, "chapters")
             FileManager.mkdir(story, "ideas")
@@ -61,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 private fun showMenu(v: View){
     popup = PopupMenu(this, v)
     val inflater: MenuInflater = popup.menuInflater
-    inflater.inflate(R.menu.settings_menu, popup.menu)
+    inflater.inflate(R.menu.story_settings_menu, popup.menu)
     popup.show()
     popup.setOnMenuItemClickListener {onMenuItemClick(it, v.parent as View)}
 }
@@ -107,12 +110,9 @@ private fun showMenu(v: View){
     private fun onMenuItemClick(item: MenuItem, parent:View): Boolean {
         val title=parent.findViewById<TextView>(R.id.storyTitle).text.toString()
         return when (item.itemId) {
-            R.id.item1 -> {
-
-                true
-            }
-            R.id.item2 -> {
+            R.id.del -> {
                 FileManager.remove(stories, title)
+                db.deleteStory(title)
                 customAdapter.newDataset(getDataset())
                 customAdapter.notifyDataSetChanged()
                 true
@@ -132,10 +132,22 @@ private fun showMenu(v: View){
         recyclerView.adapter = customAdapter
     }
     private fun getDataset(): MutableList<RvAdapter.Dataframe>{
-        return FileManager.getDirData(stories)
+        return FileManager.getDirData(stories, this, true)
     }
 
     private fun addStory(){
         dialog.show(supportFragmentManager, "STORY_DIALOG")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //TODO! add a way to check if something changed and what changed if possible
+        // so we don't have to rerender everything
+        customAdapter.newDataset(getDataset())
+        customAdapter.notifyDataSetChanged()
+    }
+    override fun onDestroy() {
+        db.closeDB()
+        super.onDestroy()
     }
 }

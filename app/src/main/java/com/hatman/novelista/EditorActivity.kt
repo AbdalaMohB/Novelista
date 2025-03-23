@@ -2,8 +2,12 @@ package com.hatman.novelista
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.hatman.novelista.EditorUtils.EditorSetup
+import com.hatman.novelista.EditorUtils.RoutineHandler
 import com.hatman.novelista.fileUtils.FileManager
+import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.flow.takeWhile
 import java.io.File
 
 class EditorActivity : AppCompatActivity() {
@@ -26,17 +30,38 @@ class EditorActivity : AppCompatActivity() {
         }
         root=FileManager.getFile(root, storyName)
         root= FileManager.getFile(root, pageName)
-        file= FileManager.getFile(root, fileName)
+        file= FileManager.getFile(root, "${fileName}.html")
         editor=EditorSetup(findViewById(R.id.edlay), readFile())
     }
 
     override fun onDestroy() {
         // TODO: save file on destroy
-        val content=editor.getText()
-        FileManager.writeTo(file, content)
+        RoutineHandler.newCoroutine {
+            val content = editor.getText()
+            if (compare(content)) {
+                FileManager.writeTo(file, content)
+            }
+        }
         super.onDestroy()
     }
     fun readFile(): String{
         return FileManager.open(file)
+    }
+    fun compare(html: String): Boolean {
+        val reader=FileManager.read(file)
+        var ch=reader.read()
+        var idx=0
+        val size=html.length
+        while (ch != -1){
+            if (idx==size){
+                return true
+            }
+            if ( html[idx].code !=ch){
+                return true
+            }
+            ch=reader.read()
+            idx+=1
+        }
+        return idx!=size
     }
 }

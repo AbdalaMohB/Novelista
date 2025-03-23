@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hatman.novelista.EditorActivity
 import com.hatman.novelista.R
 import com.hatman.novelista.Rvtools.RvAdapter
+import com.hatman.novelista.database.DBHandler
 import com.hatman.novelista.databinding.FragmentStoryBinding
 import com.hatman.novelista.fileUtils.FileManager
 import java.io.File
@@ -25,7 +26,7 @@ import java.io.File
  * A placeholder fragment containing a simple view.
  */
 class PlaceholderFragment(val storyName:String, var adapters: List<RvAdapter>) : Fragment() {
-
+    lateinit var db: DBHandler
     private lateinit var pageViewModel: PageViewModel
     private var _binding: FragmentStoryBinding? = null
     private var extras=activity?.intent?.extras
@@ -46,7 +47,7 @@ class PlaceholderFragment(val storyName:String, var adapters: List<RvAdapter>) :
             File(story, "ideas"),
             File(story, "characters")
         )
-
+        db= DBHandler(requireContext())
     }
 
     override fun onCreateView(
@@ -78,7 +79,7 @@ class PlaceholderFragment(val storyName:String, var adapters: List<RvAdapter>) :
         val itemName=view.findViewById<TextView>(R.id.storyTitle).text.toString()
         intent.putExtra("name", itemName)
         intent.putExtra("story", storyName)
-        intent.putExtra("page", page)
+        intent.putExtra("page", page-1)
         startActivity(intent)
     }
     private fun showMenu(v: View, idx: Int) {
@@ -95,11 +96,20 @@ class PlaceholderFragment(val storyName:String, var adapters: List<RvAdapter>) :
         val title=view.findViewById<TextView>(R.id.storyTitle).text.toString()
         return when (item.itemId) {
             R.id.item1 -> {
-
+                toggleDone(title, story.name, page)
+                val data=when(page){
+                    0 -> getChaps()
+                    1 -> getIdeas()
+                    2 -> getChars()
+                    else -> mutableListOf()
+                }
+                adapters[page].newDataset(data)
+                adapters[page].notifyDataSetChanged()
                 true
             }
             R.id.item2 -> {
                 FileManager.remove(parts[page], "${title}.html")
+                db.deletePart(story.name, title, page)
                 val data=when(page){
                     0 -> getChaps()
                     1 -> getIdeas()
@@ -113,7 +123,15 @@ class PlaceholderFragment(val storyName:String, var adapters: List<RvAdapter>) :
             else -> false
         }
     }
-
+private fun toggleDone(name: String, storyName: String, type:Int){
+    val old=db.getPartStatus(name, storyName, type)
+    if(old==0){
+        db.updatePartStatus(storyName, name, type, 2)
+    }
+    else{
+        db.updatePartStatus(storyName, name, type, 0)
+    }
+}
     companion object {
         /**
          * The fragment argument representing the section number for this
@@ -151,20 +169,25 @@ class PlaceholderFragment(val storyName:String, var adapters: List<RvAdapter>) :
     }
     fun getDataset(): List<MutableList<RvAdapter.Dataframe>>{
        return listOf(
-           FileManager.getDirData(parts[0]),
-           FileManager.getDirData(parts[1]),
-           FileManager.getDirData(parts[2]),
+           FileManager.getDirData(parts[0], requireContext()),
+           FileManager.getDirData(parts[1], requireContext()),
+           FileManager.getDirData(parts[2], requireContext()),
 
         )
     }
     fun getChaps(): MutableList<RvAdapter.Dataframe>{
-        return FileManager.getDirData(parts[0])
+        return FileManager.getDirData(parts[0], requireContext())
 
     }
     fun getIdeas(): MutableList<RvAdapter.Dataframe>{
-        return FileManager.getDirData(parts[1])
+        return FileManager.getDirData(parts[1], requireContext())
     }
     fun getChars():MutableList<RvAdapter.Dataframe>{
-        return FileManager.getDirData(parts[2])
+        return FileManager.getDirData(parts[2], requireContext())
+    }
+
+    override fun onDestroy() {
+        db.closeDB()
+        super.onDestroy()
     }
 }

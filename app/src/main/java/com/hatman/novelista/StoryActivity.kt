@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.view.get
+import androidx.fragment.app.DialogFragment
 import com.hatman.novelista.Rvtools.RvAdapter
+import com.hatman.novelista.database.DBHandler
 import com.hatman.novelista.ui.main.SectionsPagerAdapter
 import com.hatman.novelista.databinding.ActivityStoryBinding
 import com.hatman.novelista.fileUtils.FileManager
@@ -24,6 +26,7 @@ class StoryActivity : AppCompatActivity() {
     private lateinit var parts: List<File>
     private lateinit var adapters: List<RvAdapter>
     private var current=0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,6 +35,7 @@ class StoryActivity : AppCompatActivity() {
 
         val storyName= intent.extras?.getString("name").toString()
         val story=File(getDir("Stories", MODE_APPEND), storyName)
+
         parts=listOf(
             File(story, "chapters"),
             File(story, "ideas"),
@@ -50,7 +54,7 @@ class StoryActivity : AppCompatActivity() {
         tabs.setupWithViewPager(viewPager)
         val fab: FloatingActionButton = binding.fab
         dialog= StoryDialog{ it ->
-            FileManager.touch(parts[current], it)
+            FileManager.touch(parts[current], it, this, current)
             val datas=when(current){
                 0 -> getChaps()
                 1 -> getIdeas()
@@ -60,6 +64,7 @@ class StoryActivity : AppCompatActivity() {
             adapters[current].newDataset(datas)
             adapters[current].notifyItemInserted(datas.size-1)
         }
+
         fab.setOnClickListener { view ->
             current= viewPager.currentItem
             dialog.show(supportFragmentManager, "STORY_DIALOG")
@@ -71,20 +76,20 @@ class StoryActivity : AppCompatActivity() {
     }
     fun getDataset(): List<MutableList<RvAdapter.Dataframe>>{
         return listOf(
-            FileManager.getDirData(parts[0]),
-            FileManager.getDirData(parts[1]),
-            FileManager.getDirData(parts[2]),
+            FileManager.getDirData(parts[0], this),
+            FileManager.getDirData(parts[1], this),
+            FileManager.getDirData(parts[2], this),
 
             )
     }
     fun getChaps(): MutableList<RvAdapter.Dataframe>{
-        return FileManager.getDirData(parts[0])
+        return FileManager.getDirData(parts[0], this)
 
     }
     fun getIdeas(): MutableList<RvAdapter.Dataframe>{
-        return FileManager.getDirData(parts[1])
+        return FileManager.getDirData(parts[1], this)
     }
     fun getChars():MutableList<RvAdapter.Dataframe>{
-        return FileManager.getDirData(parts[2])
+        return FileManager.getDirData(parts[2], this)
     }
 }

@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -19,6 +20,7 @@ class StoryDialog(val onPositive: (String) -> Unit) : DialogFragment() {
             // Inflate and set the layout for the dialog.
             // Pass null as the parent view because it's going in the dialog
             // layout.
+
             val view=inflater.inflate(R.layout.name_select, null)
             builder.setView(view)
                 .setPositiveButton(R.string.confirm,
@@ -32,8 +34,13 @@ class StoryDialog(val onPositive: (String) -> Unit) : DialogFragment() {
                     DialogInterface.OnClickListener { dialog, id ->
                         getDialog()!!.cancel()
                     })
+            //setStyle(DialogFragment.STYLE_NO_FRAME, R.style.Dialog_Theme)
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
+    override fun onStart() {
+        //setStyle(DialogFragment.STYLE_NO_FRAME, android.R.style.Theme_Translucent);
+        super.onStart()
+    }
 }
